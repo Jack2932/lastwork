@@ -1,0 +1,17 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+<h1>{{ recipe.title }}</h1>
+{% if recipe.image %}
+  <img src="{{ recipe.image.url }}" class="img-fluid" alt="{{ recipe.title }}">
+{% endif %}
+<p><strong>Описание:</strong> {{ recipe.description }}</p>
+<p><strong>Ингредиенты:</strong> {{ recipe.ingredients }}</p>
+<p><strong>Шаги приготовления:</strong></p>
+<pre>{{ recipe.steps }}</pre>
+<p><strong>Время приготовления:</strong> {{ recipe.cooking_time }} мин.</p>
+<p><strong>Автор:</strong> {{ recipe.author.username }}</p>
+{% if user == recipe.author %}
+  <a href="{% url 'edit_recipe' recipe.pk %}" class="btn btn-secondary">Редактировать</a>
+{% endif %}
+{% endblock %}
